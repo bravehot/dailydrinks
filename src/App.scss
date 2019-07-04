@@ -59,4 +59,12 @@
       border: 1px solid #40a9ff
     }
   }
+  button.danger {
+    background-color: #f56c6c;
+    border-color: #f56c6c;
+    &:hover {
+      background: #f78989;
+      border-color: #f78989;
+    }
+  }
 }

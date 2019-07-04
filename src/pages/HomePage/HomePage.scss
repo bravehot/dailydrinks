@@ -2,13 +2,38 @@
   .container {
     border: 1px solid;
     margin-top: 40px;
-    padding: 10px;
+    padding: 20px;
     min-height: 200px;
     border-radius: 10px;
-    .item {
-      padding: 10px;
+    & > header {
       display: flex;
       justify-content: space-between;
+      margin-bottom: 20px;
+      span {
+        display: inline-block;
+        width: 100%;
+        text-align: center;
+      }
+    }
+    .item {
+      display: flex;
+      justify-content: space-around;
+      & > div {
+        width: 24%;
+        input {
+          width: 100%;
+          box-sizing: border-box;
+        }
+      }
+      .buttonBox {
+        display: flex;
+        justify-content: space-between;
+        padding: 0 10px;
+        box-sizing: border-box;
+        & > button {
+          width: 45%;
+        }
+      }
     }
     .toast {
       text-align: center;

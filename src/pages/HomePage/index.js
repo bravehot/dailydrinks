@@ -38,33 +38,39 @@ const HomePage = ({ isPageShow, setPageShow }) => {
       isPageShow ? 
       <section className="container" ref={inputDOM}>
         {
+          formData.length !== 0 ? 
+          <header>
+            <span>OrderName</span>
+            <span>Price</span>
+            <span>Notes</span>
+            <span>Action</span>
+          </header> : null
+        }
+        {
           formData.map((item, index) => (
             <div className="item" key={index} >
               <div>
-                <label htmlFor="name"> Name: </label>
-                <input type='text' id="name" value={item.name} disabled 
+                <input type='text' value={item.name} disabled 
                 onChange={(event) => {
                   formData[currentIndex].name = event.target.value
                   setFormData([...formData])
                 }}></input>
               </div>
               <div>
-                <label htmlFor="order">order: </label>
-                <input type='number' id="order" value={item.order} disabled 
+                <input type='number' value={item.order} disabled 
                 onChange={(event) => {
                   formData[currentIndex].order = event.target.value
                   setFormData([...formData])
                 }}></input>
               </div>
               <div>
-                <label htmlFor="notes">notes: </label>
-                <input type='text' id="notes" value={item.notes} disabled 
+                <input type='text' value={item.notes} disabled 
                 onChange={(event) => {
                   formData[currentIndex].notes = event.target.value
                   setFormData([...formData])
                 }}></input>
               </div>
-              <div>
+              <div className="buttonBox">
                 {
                   item.disabled ? 
                     <button onClick={() => {
