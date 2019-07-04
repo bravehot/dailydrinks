@@ -1,0 +1,62 @@
+.App {
+  max-width: 980px;
+  margin: 50px auto;
+  > header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+    .add {
+      padding: 5px 15px;
+      font-size: 16px;
+      height: 36px;
+    }
+    .title {
+      font-size: 50px;
+    }
+  }
+  input {
+    background-color: #fff;
+    background-image: none;
+    border: 1px solid #d9d9d9;
+    border-radius: 4px;
+    font-size: 20px;
+    padding: 4px 11px;
+    box-shadow: 0 0 2px rgba(24,144,255,0.2);
+  }
+  textarea {
+    min-height: 60px;
+    line-height: 1.5;
+    vertical-align: bottom;
+    background-color: #fff;
+    background-image: none;
+    border: 1px solid #d9d9d9;
+    box-sizing: border-box;
+    padding: 4px 11px;
+    resize: none;
+    border-radius: 4px;
+  }
+  button {
+    cursor: pointer;
+    outline: none; 
+    border: 0;
+    border-radius: 5px;
+    font-size: 16px;
+  }
+  button.primary {
+    color: #fff;
+    background-color: #1890ff;
+    border-color: #1890ff;
+    &:hover {
+      background-color: #40a9ff;
+      border-color: #40a9ff;
+    }
+  }
+  button.default {
+    color: black;
+    border-color: #d9d9d9;
+    &:hover {
+      border: 1px solid #40a9ff
+    }
+  }
+}

@@ -1,13 +1,14 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState } from 'react'
+import PropTypes from 'prop-types'
 
-import AddInfo from '../components/AddInfo'
 
-import './HomePage.sass'
+import AddInfo from '../AddInfo'
 
-const HomePage = () => {
+import './HomePage.scss'
+
+const HomePage = ({ isPageShow, setPageShow }) => {
   const [currentIndex, setIndex] = useState(null)
   const inputDOM = React.createRef();
-  const [addInfoShow, setShow] = useState(false)
   const [formData, setFormData] = useState([])
   
   const handleRemove = (event, index) => {
@@ -19,7 +20,6 @@ const HomePage = () => {
 
   const handleDisabled = (index, type) => {
     let currentInput =  inputDOM.current.childNodes[index].querySelectorAll('input')
-    console.log(currentInput);
     Array.from(currentInput).forEach(item => {
         type === 1 ? item.removeAttribute('disabled') : item.setAttribute('disabled', "")
     })
@@ -34,14 +34,8 @@ const HomePage = () => {
 
   return (
     <section className="homePage">
-      <header>
-        <button onClick={() => setShow(!addInfoShow)} className="add"> Add </button>
-      </header>
-      {
-        addInfoShow ? 
-          <AddInfo setFormData={setFormData} formData={formData}/> 
-          : null
-      }
+    {
+      isPageShow ? 
       <section className="container" ref={inputDOM}>
         {
           formData.map((item, index) => (
@@ -88,10 +82,18 @@ const HomePage = () => {
         {
           formData.length === 0 ? <p className="toast">Sorry! This category have nothing data.</p> : null
         }
-        
       </section>
+       : <AddInfo setFormData={setFormData} formData={formData} setPageShow={setPageShow}/>
+    }
     </section>
   )
 }
+
+HomePage.propTypes = {
+  isPageShow: PropTypes.bool,
+  setPageShow: PropTypes.func
+}
+
+
 
 export default HomePage
