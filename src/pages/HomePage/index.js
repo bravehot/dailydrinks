@@ -1,35 +1,37 @@
 import React, { useState } from 'react'
 import PropTypes from 'prop-types'
 
-
 import AddInfo from '../AddInfo'
-
 import './HomePage.scss'
 
 const HomePage = ({ isPageShow, setPageShow }) => {
-  const [currentIndex, setIndex] = useState(null)
   const inputDOM = React.createRef();
+  const [currentIndex, setIndex] = useState(null)
   const [formData, setFormData] = useState([])
   
   const handleRemove = (event, index) => {
     if (formData.length) {
-      formData.splice(index, 1)
-      setFormData([...formData])
+      let result  = window.confirm("确定要删除此订单信息吗？");
+      if (result === true) {
+        formData.splice(index, 1)
+        setFormData([...formData])
+      } 
     }
   }
 
   const handleDisabled = (index, type) => {
-    let currentInput =  inputDOM.current.childNodes[index].querySelectorAll('input')
+    let currentInput =  Array.from(inputDOM.current.childNodes).splice(1, inputDOM.current.childNodes.length)[index].querySelectorAll('input')
+    console.log(currentInput)
+    
     Array.from(currentInput).forEach(item => {
         type === 1 ? item.removeAttribute('disabled') : item.setAttribute('disabled', "")
     })
   }
   
   const handleEdit = (event, index) => {
-    formData[index].disabled = true
     setIndex(index)
     setFormData([...formData])
-    handleDisabled(index, 1)
+    setPageShow(false)
   }
 
   return (
@@ -71,16 +73,8 @@ const HomePage = ({ isPageShow, setPageShow }) => {
                 }}></input>
               </div>
               <div className="buttonBox">
-                {
-                  item.disabled ? 
-                    <button onClick={() => {
-                      formData[index].disabled = false
-                      setFormData([...formData])
-                      handleDisabled(index, 2)
-                    }}>Update</button> 
-                    : <button onClick={(event) => {handleEdit(event, index)}}>Edit</button>
-                }
-                <button onClick={(event) => {handleRemove(event, index)}} className="delete">Delete</button>
+                <button onClick={(event) => {handleEdit(event, index)}} className="default">Edit</button>
+                <button onClick={(event) => {handleRemove(event, index)}} className="delete danger">Delete</button>
               </div>
           </div>
           ))
@@ -89,7 +83,7 @@ const HomePage = ({ isPageShow, setPageShow }) => {
           formData.length === 0 ? <p className="toast">Sorry! This category have nothing data.</p> : null
         }
       </section>
-       : <AddInfo setFormData={setFormData} formData={formData} setPageShow={setPageShow}/>
+       : <AddInfo setFormData={setFormData} formData={formData} setPageShow={setPageShow} currentIndex={currentIndex} />
     }
     </section>
   )
@@ -99,7 +93,5 @@ HomePage.propTypes = {
   isPageShow: PropTypes.bool,
   setPageShow: PropTypes.func
 }
-
-
 
 export default HomePage
