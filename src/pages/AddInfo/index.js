@@ -1,21 +1,20 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState } from 'react'
 import PropTypes from 'prop-types';
 
 import './AddInfo.scss'
 
-const AddInfo = ({setFormData, formData, setPageShow, currentIndex}) => {
+const AddInfo = ({setFormData, formData, setPageShow}) => {
   const [info, setInfo] = useState({
     name: '',
     order: '',
     notes: ''
   })
 
-  const [oldIndex, setOldIndex] = useState(-1)
   
   const handleAddInfo = () => {
     const {name, order, notes} = info
     if (name && order) { 
-      formData.push({name, order, notes})
+      formData.push({name, order, notes, disabled: false})
       setFormData([...formData])
       setInfo({
         name: '',
@@ -44,18 +43,6 @@ const AddInfo = ({setFormData, formData, setPageShow, currentIndex}) => {
     }
   }
 
-  const updateAddInfo = () => {
-    formData[currentIndex] = {name: info.name, notes:info.notes, order: info.order}
-    setFormData([...formData])
-    setInfo({
-      name: '',
-      order: '',
-      notes: ''
-    })
-    setPageShow(true)
-  }
-
-
   return (
     <div className="AddInfo">
       <div>
@@ -72,10 +59,7 @@ const AddInfo = ({setFormData, formData, setPageShow, currentIndex}) => {
       </div>
       <div className="buttonBox">
         <button className="default back" onClick={() => {handleBack()}}>Back</button>
-        {
-          typeof currentIndex === 'number' ? <button className="primary" onClick={() => {updateAddInfo()}}>Update</button> : 
-          <button className="primary" onClick={() => {handleAddInfo()}}>Submit</button>
-        }
+        <button className="primary" onClick={() => {handleAddInfo()}}>Submit</button>
       </div>
     </div>
   )
@@ -84,7 +68,6 @@ AddInfo.propTypes = {
   setFormData: PropTypes.func,
   formData: PropTypes.array,
   setPageShow: PropTypes.func,
-  currentIndex: PropTypes.number
 }
 
 export default AddInfo
