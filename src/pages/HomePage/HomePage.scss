@@ -50,3 +50,52 @@
     }
   }
 }
+
+// media
+@media (max-width: 576px) {
+  .homePage {
+    .container {
+      overflow: auto;
+      padding: 10px;
+      & > header {
+        & > span {
+          min-width: 130px;
+          margin: 0 5px;
+        }
+      }
+      .toast {
+        font-size: 14px;
+      }
+      .item {
+        width: auto;
+        display: flex;
+        justify-content: flex-start;
+        padding: 10px 0;
+        div {
+          width: auto;
+          margin: 0 5px;
+          input {
+            min-width: 130px;
+          }
+        }
+        .buttonBox {
+          button {
+            min-width: 50px;
+          }
+        }
+      }
+    }
+  }
+}
+
+// media
+@media (max-width: 380px) {
+  .homePage {
+    .container {
+      padding: 10px;
+      .toast {
+        font-size: 14px;
+      }
+    }
+  }
+}

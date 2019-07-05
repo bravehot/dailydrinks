@@ -70,3 +70,45 @@
     }
   }
 }
+
+// media
+@media (max-width: 768px) {
+  .App {
+    width: 80%;
+  }
+}
+
+
+@media (max-width: 576px) {
+  .App {
+    width: 100%;
+    padding: 0 10px;
+    box-sizing: border-box;
+    > header {
+      flex-wrap: wrap;
+      position: relative;
+      .add {
+        position: absolute;
+        right: 0;
+        bottom: 0;
+      }
+    }
+  }
+}
+
+// @media (max-width: 380px) {
+//   .App {
+//     width: 100%;
+//     padding: 0 10px;
+//     box-sizing: border-box;
+//     > header {
+//       flex-wrap: wrap;
+//       .add {
+//         margin-left: 190px;
+//         font-size: 14px;
+//         padding: 5px;
+//       }
+//     }
+//   }
+// }
+
