@@ -33,7 +33,7 @@ const AddInfo = ({setFormData, formData, setPageShow}) => {
 
   const handleBack = () => {
     const {name, order, notes} = info
-    if (!name || !order || !notes) {
+    if (name || order || notes) {
       let result  = window.confirm("内容未保存，确定要离开嘛？");
       if (result === true) {
         setPageShow(true)
