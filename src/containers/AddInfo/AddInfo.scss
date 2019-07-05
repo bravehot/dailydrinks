@@ -3,11 +3,12 @@
   padding: 10px;
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
+  align-items: center;
   margin: 0 auto;
   text-align: center;
   & > div {
-    margin: 15px 0
+    margin: 15px 0;
+    display: flex;
   }
   label {
     display: inline-block;
@@ -15,6 +16,16 @@
     font-size: 20px;
     text-align: left;
     vertical-align: top;
+  }
+  .error {
+    color: #ff4d4f;
+    text-align: left;
+  }
+  .error.hide {
+    display: none;
+  }
+  .error.show {
+    display: block;
   }
   .buttonBox {
     margin-top: 80px;

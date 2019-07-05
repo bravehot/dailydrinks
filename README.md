@@ -1,14 +1,23 @@
 
-### 项目启动
-npm start
+### Project Name
+  dailydrinks
 
-### 项目目录描述
-pages // 组件
-  AddInfo // 添加订单信息
-  HomePage // 主页订单信息展示
+### Functions Brief
+  * a list to list all the orders
+  * add a new order
+  * delete any order in the list
+  * edit any order in the list
+  * supports RWD
 
-### 使用 react hooks 特性
+### How to run it ?
+  1. `npm i` or `yarn` 
+  2. `npm start`
 
-### 使用 node-sass 编译 scss 文件
+### Directory
+  * containers 
+    * AddInfo // Add order information
+    * HomePage // list all the orders
 
-### 使用 css3 媒体查询 兼容移动端
+### Use Dependency
+  * node-sass
+  * react 16.8

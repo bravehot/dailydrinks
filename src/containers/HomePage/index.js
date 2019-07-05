@@ -8,10 +8,15 @@ const HomePage = ({ isPageShow, setPageShow }) => {
   const inputDOM = React.createRef();
   const [currentIndex, setIndex] = useState(null)
   const [formData, setFormData] = useState([])
+  const [currentData, setCurrentData] = useState({
+    name: '',
+    order: '',
+    notes: ''
+  })
   
   const handleRemove = (event, index) => {
     if (formData.length) {
-      let result  = window.confirm("确定要删除此订单信息吗？");
+      let result  = window.confirm("Do you want to delete this order message ?");
       if (result === true) {
         formData.splice(index, 1)
         setFormData([...formData])
@@ -27,10 +32,9 @@ const HomePage = ({ isPageShow, setPageShow }) => {
   }
   
   const handleEdit = (event, index) => {
-    formData[index].disabled = true
+    setPageShow(3)
     setIndex(index)
-    setFormData([...formData])
-    handleDisabled(index, 1)
+    setCurrentData({...formData[index]})
   }
 
   const updateInfo = (event, index) => {
@@ -44,9 +48,9 @@ const HomePage = ({ isPageShow, setPageShow }) => {
     }
   }
 
-  const checkField = (index, type) => {
+  const checkField = (index) => {
     if (!formData[index].name || !formData[index].order) {
-      alert('内容未更新，是否离开')
+      alert('Content not updated, whether to leave')
     }
   }
 
@@ -54,7 +58,7 @@ const HomePage = ({ isPageShow, setPageShow }) => {
   return (
     <section className="homePage">
     {
-      isPageShow ? 
+      isPageShow === 1? 
       <section className="container" ref={inputDOM}>
         {
           formData.length !== 0 ? 
@@ -106,17 +110,24 @@ const HomePage = ({ isPageShow, setPageShow }) => {
           ))
         }
         {
-          formData.length === 0 ? <p className="toast">Sorry! This category have nothing data.</p> : null
+          formData.length === 0 ? <p className="toast">Sorry! This category have no data.</p> : null
         }
       </section>
-      : <AddInfo setFormData={setFormData} formData={formData} setPageShow={setPageShow} />
+      : <AddInfo 
+          setFormData={setFormData} 
+          formData={formData} 
+          setPageShow={setPageShow} 
+          isPageShow={isPageShow} 
+          currentData={currentData}
+          currentIndex={currentIndex}
+        />
     }
     </section>
   )
 }
 
 HomePage.propTypes = {
-  isPageShow: PropTypes.bool,
+  isPageShow: PropTypes.number,
   setPageShow: PropTypes.func
 }
 
