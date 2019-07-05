@@ -3,7 +3,14 @@ import PropTypes from 'prop-types';
 
 import './AddInfo.scss'
 
-const AddInfo = ({setFormData, formData, setPageShow, currentData, isPageShow, currentIndex}) => {
+const AddInfo = ({
+  setFormData, 
+  formData, 
+  setPageShow, 
+  currentData, 
+  isPageShow, 
+  currentIndex
+}) => {
   const errorName = React.createRef()
   const errorOrder = React.createRef()
   const [info, setInfo] = useState({
@@ -11,8 +18,6 @@ const AddInfo = ({setFormData, formData, setPageShow, currentData, isPageShow, c
     order: '',
     notes: ''
   })
-  
-
 
   const handleAddInfo = () => {
     const {name, order, notes} = info
