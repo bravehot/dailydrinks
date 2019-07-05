@@ -5,7 +5,6 @@ import AddInfo from '../AddInfo'
 import './HomePage.scss'
 
 const HomePage = ({ isPageShow, setPageShow }) => {
-  const inputDOM = React.createRef();
   const [currentIndex, setIndex] = useState(null)
   const [formData, setFormData] = useState([])
   const [currentData, setCurrentData] = useState({
@@ -24,42 +23,17 @@ const HomePage = ({ isPageShow, setPageShow }) => {
     }
   }
 
-  const handleDisabled = (index, type) => {
-    let currentInput =  Array.from(inputDOM.current.childNodes).splice(1, inputDOM.current.childNodes.length)[index].querySelectorAll('input')
-    Array.from(currentInput).forEach(item => {
-        type === 1 ? item.removeAttribute('disabled') : item.setAttribute('disabled', "")
-    })
-  }
-  
   const handleEdit = (event, index) => {
     setPageShow(3)
     setIndex(index)
     setCurrentData({...formData[index]})
   }
 
-  const updateInfo = (event, index) => {
-    formData[index].disabled = false
-    if (formData[index].name && formData[index].order){
-      setFormData([...formData])
-      handleDisabled(index, 2)
-    } else {
-      alert('请输入 OrderName 和 Price')
-      formData[index].disabled = true
-    }
-  }
-
-  const checkField = (index) => {
-    if (!formData[index].name || !formData[index].order) {
-      alert('Content not updated, whether to leave')
-    }
-  }
-
-
   return (
     <section className="homePage">
     {
-      isPageShow === 1? 
-      <section className="container" ref={inputDOM}>
+      isPageShow === 1 ? 
+      <section className="container">
         {
           formData.length !== 0 ? 
           <header>
@@ -78,7 +52,6 @@ const HomePage = ({ isPageShow, setPageShow }) => {
                     formData[currentIndex].name = event.target.value
                     setFormData([...formData])
                   }}
-                  onBlur={() => {checkField(index)}}
                 />
               </div>
               <div>
@@ -87,7 +60,6 @@ const HomePage = ({ isPageShow, setPageShow }) => {
                     formData[currentIndex].order = event.target.value
                     setFormData([...formData])
                   }}
-                  onBlur={() => {checkField(index)}}
                 />
               </div>
               <div>
@@ -95,15 +67,10 @@ const HomePage = ({ isPageShow, setPageShow }) => {
                   onChange={(event) => {
                     formData[currentIndex].notes = event.target.value
                     setFormData([...formData])}} 
-                  onBlur={() => {checkField(index)}}
                 />
               </div>
               <div className="buttonBox">
-              {
-                item.disabled ? 
-                  <button onClick={(event) => {updateInfo(event, index)}} className="default">Update</button> 
-                  : <button onClick={(event) => {handleEdit(event, index)}} className="default">Edit</button>
-              }
+                <button onClick={(event) => {handleEdit(event, index)}} className="default">Edit</button>
                 <button onClick={(event) => {handleRemove(event, index)}} className="delete danger">Delete</button>
               </div>
           </div>

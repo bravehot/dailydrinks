@@ -9,8 +9,6 @@ const AddInfo = ({setFormData, formData, setPageShow, currentData, isPageShow, c
     order: '',
     notes: ''
   })
-
-
   
   const handleAddInfo = () => {
     const {name, order, notes} = info
@@ -89,7 +87,6 @@ const AddInfo = ({setFormData, formData, setPageShow, currentData, isPageShow, c
           isPageShow !== 3 ? <button className="primary" onClick={() => {handleAddInfo()}}>Submit</button> 
           : <button className="primary" onClick={() => {handleUpdate()}}>Update</button>
         }
-        
       </div>
     </div>
   )
