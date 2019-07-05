@@ -4,6 +4,11 @@ import HomePage from './containers/HomePage/index'
 import './App.scss'
 
 function App() {
+  /**
+   * isPageShow: 1 --> OrderList
+   * isPageShow: 2 --> Add Order
+   * isPageShow: 3 --> Update Order
+   */ 
   const [isPageShow, setPageShow] = useState(1)
   return (
     <div className="App">

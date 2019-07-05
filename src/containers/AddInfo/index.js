@@ -4,14 +4,19 @@ import PropTypes from 'prop-types';
 import './AddInfo.scss'
 
 const AddInfo = ({setFormData, formData, setPageShow, currentData, isPageShow, currentIndex}) => {
+  const errorName = React.createRef()
+  const errorOrder = React.createRef()
   const [info, setInfo] = useState({
     name: '',
     order: '',
     notes: ''
   })
   
+
+
   const handleAddInfo = () => {
     const {name, order, notes} = info
+    fieldCheck()
     if (name && order) { 
       formData.push({name, order, notes, disabled: false})
       setFormData([...formData])
@@ -38,6 +43,7 @@ const AddInfo = ({setFormData, formData, setPageShow, currentData, isPageShow, c
 
   const handleUpdate = () => {
     const {name, order, notes} = info
+    fieldCheck()
     if (name && order) {
       formData[currentIndex].name = name
       formData[currentIndex].order = order
@@ -45,6 +51,16 @@ const AddInfo = ({setFormData, formData, setPageShow, currentData, isPageShow, c
       setFormData([...formData])
       setPageShow(1)
     }
+  }
+
+  const fieldCheck = () => {
+    const { name, order } = info
+    name.length > 0 ? 
+      errorName.current.className = 'error hide' 
+      : errorName.current.className = 'error show'
+    order.length > 0? 
+      errorOrder.current.className = 'error hide' 
+      : errorOrder.current.className = 'error show'
   }
 
   useEffect(() => {
@@ -64,15 +80,21 @@ const AddInfo = ({setFormData, formData, setPageShow, currentData, isPageShow, c
       <div>
         <label htmlFor="name"> OrderName: </label>
         <div>
-          <input type='text' id="name" value={info.name} onChange={(event) => setInfo({name: event.target.value, notes:info.notes, order: info.order})}></input>
-          <p className={info.name ? 'error hide' : 'error show'}>OrderName is required</p>
+          <input type='text' id="name" value={info.name} onChange={(event) => {
+            errorName.current.className = 'error hide' 
+            setInfo({name: event.target.value, notes:info.notes, order: info.order})
+          }}></input>
+          <p className='error hide' ref={errorName}>OrderName is required</p>
         </div>
       </div>
       <div>
         <label htmlFor="order">Price: </label>
         <div>
-          <input type='number' id="order" value={info.order} onChange={(event) => setInfo({order: event.target.value, notes:info.notes, name: info.name}) }></input>
-          <p className={info.order ? 'error hide' : 'error show'}>Price is required</p>
+          <input type='number' id="order" value={info.order} onChange={(event) => {
+            errorOrder.current.className = 'error hide' 
+            setInfo({order: event.target.value, notes:info.notes, name: info.name})
+          } }></input>
+          <p className='error hide' ref={errorOrder}>Price is required</p>
         </div>
       </div>
       <div>
@@ -92,11 +114,11 @@ const AddInfo = ({setFormData, formData, setPageShow, currentData, isPageShow, c
   )
 }
 AddInfo.propTypes = {
-  setFormData: PropTypes.func,
-  formData: PropTypes.array,
-  setPageShow: PropTypes.func,
-  currentData: PropTypes.object,
-  isPageShow: PropTypes.number,
+  setFormData: PropTypes.func.isRequired,
+  formData: PropTypes.array.isRequired,
+  setPageShow: PropTypes.func.isRequired,
+  currentData: PropTypes.object.isRequired,
+  isPageShow: PropTypes.number.isRequired,
   currentIndex: PropTypes.number
 }
 

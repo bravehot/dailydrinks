@@ -94,8 +94,8 @@ const HomePage = ({ isPageShow, setPageShow }) => {
 }
 
 HomePage.propTypes = {
-  isPageShow: PropTypes.number,
-  setPageShow: PropTypes.func
+  isPageShow: PropTypes.number.isRequired,
+  setPageShow: PropTypes.func.isRequired
 }
 
 export default HomePage
