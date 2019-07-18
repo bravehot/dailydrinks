@@ -78,6 +78,22 @@
 // media
 @media (max-width: 576px) {
   .homePage {
+    & > header {
+      position: relative;
+      .no-data {
+        margin-top: 30px !important;
+      }
+      .add {
+        position: absolute;
+        height: 36px;
+        line-height: 36px;
+        padding: 0 30px;
+      }
+      .addInfo {
+        right: 0;
+        bottom: -15px;
+      }
+    }
     .container {
       overflow: auto;
       padding: 10px;
@@ -86,16 +102,6 @@
         position: relative;
         title {
           font-size: 36px;
-        }
-        .no-data {
-          margin-top: 30px;
-        }
-        .add {
-          position: absolute;
-          margin-top: 15px;
-          height: 36px;
-          line-height: 36px;
-          padding: 0 30px;
         }
       }
       .toast {
@@ -119,6 +125,18 @@
           }
         }
       }
+      .name, .price, .notes{
+        width: 30% !important;
+        overflow: hidden;
+        text-overflow:ellipsis;
+        white-space: nowrap;
+      }
+      .notes {
+        flex: none !important;
+      }
+      .action{
+        width: 40% !important;
+      } 
     }
   }
 }
