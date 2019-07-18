@@ -1,19 +1,6 @@
 .App {
   max-width: 980px;
   margin: 50px auto;
-  > header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    .add {
-      padding: 5px 15px;
-      font-size: 16px;
-      height: 36px;
-    }
-    .title {
-      font-size: 50px;
-    }
-  }
   input {
     width: 258px;
     background-color: #fff;

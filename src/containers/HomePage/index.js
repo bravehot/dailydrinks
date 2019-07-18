@@ -1,10 +1,15 @@
 import React, { useState } from 'react'
-import PropTypes from 'prop-types'
 
 import AddInfo from '../AddInfo'
 import './HomePage.scss'
 
-const HomePage = ({ isPageShow, setPageShow }) => {
+const HomePage = () => {
+  /**
+   * isPageShow: 1 --> OrderList
+   * isPageShow: 2 --> Add Order
+   * isPageShow: 3 --> Update Order
+   */ 
+  const [isPageShow, setPageShow] = useState(1)
   const [currentIndex, setIndex] = useState(null)
   const [formData, setFormData] = useState([])
   const [currentData, setCurrentData] = useState({
@@ -31,6 +36,21 @@ const HomePage = ({ isPageShow, setPageShow }) => {
 
   return (
     <section className="homePage">
+    <header className={isPageShow !== 1 ? 'addInfo' : (formData.length !== 0 ? 'addInfo' : '')}>
+      {
+        isPageShow === 1 ? <p className="title">OrderList</p> 
+          : ( isPageShow === 2 ? <p className="title">Add Order</p> : <p className="title">Update Order</p>)
+      }
+      {
+        ( isPageShow === 1 ) ?  formData.length === 0 ? <p className="no-data">
+          You don’t have any orders yet. <br/>
+          Click the “New Order” button to add your own order.
+        </p> : null : null
+      }
+      <button className="add primary" onClick={() => {
+        setPageShow(2)
+      }}>New Order</button> 
+    </header>
     {
       isPageShow === 1 ? 
       <section className="container">
@@ -76,9 +96,6 @@ const HomePage = ({ isPageShow, setPageShow }) => {
           </div>
           ))
         }
-        {
-          formData.length === 0 ? <p className="toast">Sorry! This category have no data.</p> : null
-        }
       </section>
       : <AddInfo 
           setFormData={setFormData} 
@@ -93,9 +110,5 @@ const HomePage = ({ isPageShow, setPageShow }) => {
   )
 }
 
-HomePage.propTypes = {
-  isPageShow: PropTypes.number.isRequired,
-  setPageShow: PropTypes.func.isRequired
-}
 
 export default HomePage

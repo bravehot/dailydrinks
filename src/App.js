@@ -1,25 +1,12 @@
-import React, { useState } from 'react';
+import React from 'react';
 
 import HomePage from './containers/HomePage/index'
 import './App.scss'
 
 function App() {
-  /**
-   * isPageShow: 1 --> OrderList
-   * isPageShow: 2 --> Add Order
-   * isPageShow: 3 --> Update Order
-   */ 
-  const [isPageShow, setPageShow] = useState(1)
   return (
     <div className="App">
-      <header>
-        {
-          isPageShow === 1 ? <p className="title">OrderList</p> 
-            : ( isPageShow === 2 ? <p className="title">Add Order</p> : <p className="title">Update Order</p>)
-        }
-        <button className="add primary" onClick={() => {setPageShow(2)}}>New Order</button> 
-      </header>
-      <HomePage isPageShow={isPageShow} setPageShow={setPageShow} />
+      <HomePage />
     </div>
   );
 }
