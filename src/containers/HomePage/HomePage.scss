@@ -1,17 +1,20 @@
 .homePage {
   > header {
     .add {
-      padding: 10px 25px;
-      font-size: 14px;
-      height: 36px;
+      font-size: 16px;
+      height: 56px;
+      line-height: 56px;
+      padding: 0 40px;
+      font-weight: 600;
     }
     .title {
-      font-size: 40px;
+      font-size: 50px;
     }
     .no-data {
       color: #8c8c8c;
-      font-size: 14px;
-      margin: 80px 0 30px;
+      font-size: 16px;
+      margin: 150px 0 50px;
+      line-height: 30px;
     }
     &.addInfo {
       display: flex;
@@ -20,43 +23,45 @@
     }
   }
   .container {
-    border-top: 1px solid #d8d8d8;
     margin-top: 40px;
     padding: 20px;
     min-height: 200px;
+    .name, .price{
+      width: 18%;
+    } 
+    .action {
+      width: 23%;
+    }
+    .notes {
+      flex: 1
+    }
     & > header {
-      display: flex;
-      justify-content: space-between;
-      margin-bottom: 10px;
-      font-weight: 600;
       font-size: 18px;
+      border-top: 1px solid #d8d8d8;
+      border-bottom: 1px solid #d8d8d8;
+      height: 48px;
+      line-height: 48px;
+      display: flex;
       span {
         display: inline-block;
         width: 100%;
-        text-align: center;
+        text-align: left;
+        color: #8C8C8C
       }
     }
     .item {
       display: flex;
       justify-content: space-around;
-      padding: 10px 0;
-      & > div {
-        width: 24%;
-        input {
-          width: 100%;
-          box-sizing: border-box;
-          font-size: 14px;
-        }
-      }
-      .buttonBox {
+      height: 48px;
+      border-bottom: 1px solid #d8d8d8;
+      color: #1A1A1A;
+      .handle {
         display: flex;
-        justify-content: space-between;
-        padding: 0 10px;
-        box-sizing: border-box;
-
-        & > button {
-          width: 45%;
-          font-size: 14px;
+        justify-content: flex-start;
+        p {
+          min-width: 40%;
+          text-align: left;
+          cursor: pointer;
         }
       }
     }
@@ -76,10 +81,21 @@
     .container {
       overflow: auto;
       padding: 10px;
-      & > header {
-        & > span {
-          min-width: 130px;
-          margin: 0 5px;
+      > header {
+        flex-wrap: wrap;
+        position: relative;
+        title {
+          font-size: 36px;
+        }
+        .no-data {
+          margin-top: 30px;
+        }
+        .add {
+          position: absolute;
+          margin-top: 15px;
+          height: 36px;
+          line-height: 36px;
+          padding: 0 30px;
         }
       }
       .toast {
@@ -110,10 +126,48 @@
 // media
 @media (max-width: 380px) {
   .homePage {
+    overflow: auto;
     .container {
-      padding: 10px;
       .toast {
         font-size: 14px;
+      }
+      & > header {
+        flex-wrap: nowrap;
+      }
+    }
+    .name, .price, .notes{
+      width: 30% !important;
+      overflow: hidden;
+      text-overflow:ellipsis;
+      white-space: nowrap;
+    }
+    .notes {
+      flex: none !important;
+    }
+    .action{
+      width: 40% !important;
+    } 
+    > header {
+      flex-wrap: wrap;
+      position: relative;
+      title {
+        font-size: 36px;
+      }
+      .no-data {
+        margin-top: 30px;
+        line-height: 40px;
+        margin-bottom: 20px;
+      }
+      .add {
+        position: absolute;
+        height: 36px;
+        line-height: 36px;
+        padding: 0 30px;
+        bottom: -5px;
+      }
+      .addInfo {
+        right: 0;
+        bottom: -15px;
       }
     }
   }

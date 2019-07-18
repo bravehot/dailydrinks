@@ -4,12 +4,11 @@ import PropTypes from 'prop-types';
 import './AddInfo.scss'
 
 const AddInfo = ({
-  setFormData, 
-  formData, 
   setPageShow, 
   currentData, 
   isPageShow, 
-  currentIndex
+  addInfo,
+  updateInfo
 }) => {
   const errorName = React.createRef()
   const errorOrder = React.createRef()
@@ -20,18 +19,8 @@ const AddInfo = ({
   })
 
   const handleAddInfo = () => {
-    const {name, order, notes} = info
-    fieldCheck()
-    if (name && order) { 
-      formData.push({name, order, notes, disabled: false})
-      setFormData([...formData])
-      setInfo({
-        name: '',
-        order: '',
-        notes: ''
-      })
-      setPageShow(1)
-    }
+      fieldCheck()
+      addInfo(info)
   }
 
   const handleBack = () => {
@@ -47,15 +36,8 @@ const AddInfo = ({
   }
 
   const handleUpdate = () => {
-    const {name, order, notes} = info
     fieldCheck()
-    if (name && order) {
-      formData[currentIndex].name = name
-      formData[currentIndex].order = order
-      formData[currentIndex].notes = notes
-      setFormData([...formData])
-      setPageShow(1)
-    }
+    updateInfo(info)
   }
 
   const fieldCheck = () => {
@@ -119,12 +101,11 @@ const AddInfo = ({
   )
 }
 AddInfo.propTypes = {
-  setFormData: PropTypes.func.isRequired,
-  formData: PropTypes.array.isRequired,
   setPageShow: PropTypes.func.isRequired,
   currentData: PropTypes.object.isRequired,
   isPageShow: PropTypes.number.isRequired,
-  currentIndex: PropTypes.number
+  addInfo: PropTypes.func.isRequired,
+  updateInfo: PropTypes.func.isRequired,
 }
 
 export default AddInfo

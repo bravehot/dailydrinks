@@ -34,6 +34,26 @@ const HomePage = () => {
     setCurrentData({...formData[index]})
   }
 
+  const addInfo = (info) => {
+    const {name, order, notes} = info
+    if (name && order) { 
+      formData.push({name, order, notes, disabled: false})
+      setFormData([...formData])
+      setPageShow(1)
+    }
+  }
+
+  const updateInfo = (info) => {
+    const {name, order, notes} = info
+    if (name && order) {
+      formData[currentIndex].name = name
+      formData[currentIndex].order = order
+      formData[currentIndex].notes = notes
+      setFormData([...formData])
+      setPageShow(1)
+    }
+  }
+
   return (
     <section className="homePage">
     <header className={isPageShow !== 1 ? 'addInfo' : (formData.length !== 0 ? 'addInfo' : '')}>
@@ -47,7 +67,7 @@ const HomePage = () => {
           Click the “New Order” button to add your own order.
         </p> : null : null
       }
-      <button className="add primary" onClick={() => {
+      <button className={isPageShow !== 1 ? 'add primary addInfo' : (formData.length !== 0 ? 'add primary' : 'add primary')} onClick={() => {
         setPageShow(2)
       }}>New Order</button> 
     </header>
@@ -57,41 +77,21 @@ const HomePage = () => {
         {
           formData.length !== 0 ? 
           <header>
-            <span>OrderName</span>
-            <span>Price</span>
-            <span>Notes</span>
-            <span>Action</span>
+            <span className="name">Name</span>
+            <span className="price">Price</span>
+            <span className="notes">Notes</span>
+            <span className="action">Action</span>
           </header> : null
         }
         {
           formData.map((item, index) => (
             <div className="item" key={index} >
-              <div>
-                <input type='text' value={item.name} disabled
-                  onChange={(event) => {
-                    formData[currentIndex].name = event.target.value
-                    setFormData([...formData])
-                  }}
-                />
-              </div>
-              <div>
-                <input type='number' value={item.order} disabled 
-                  onChange={(event) => {
-                    formData[currentIndex].order = event.target.value
-                    setFormData([...formData])
-                  }}
-                />
-              </div>
-              <div>
-                <input type='text' value={item.notes} disabled 
-                  onChange={(event) => {
-                    formData[currentIndex].notes = event.target.value
-                    setFormData([...formData])}} 
-                />
-              </div>
-              <div className="buttonBox">
-                <button onClick={(event) => {handleEdit(event, index)}} className="default">Edit</button>
-                <button onClick={(event) => {handleRemove(event, index)}} className="delete danger">Delete</button>
+              <p className="name">{item.name}</p>
+              <p className="price">{item.order}</p>
+              <p className="notes">{item.notes}</p>
+              <div className="action handle">
+                <p className="edit" onClick={(event) => {handleEdit(event, index)}}>Edit</p>
+                <p className="delete" onClick={(event) => {handleRemove(event, index)}}>Delete</p>
               </div>
           </div>
           ))
@@ -104,6 +104,8 @@ const HomePage = () => {
           isPageShow={isPageShow} 
           currentData={currentData}
           currentIndex={currentIndex}
+          addInfo={addInfo}
+          updateInfo={updateInfo}
         />
     }
     </section>

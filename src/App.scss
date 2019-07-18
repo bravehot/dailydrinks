@@ -1,5 +1,5 @@
 .App {
-  max-width: 980px;
+  max-width: 1024px;
   margin: 50px auto;
   input {
     width: 258px;
@@ -35,17 +35,16 @@
     color: #fff;
     background-color: #1890ff;
     border-color: #1890ff;
+    font-weight: 600;
     &:hover {
       background-color: #40a9ff;
       border-color: #40a9ff;
     }
   }
   button.default {
-    color: black;
-    border-color: #d9d9d9;
-    &:hover {
-      border: 1px solid #40a9ff
-    }
+    color: #1890ff;
+    background-color: #fff;
+    border: 1px solid #40a9ff
   }
   button.danger {
     background-color: #f56c6c;
@@ -72,16 +71,6 @@
     padding: 0 10px;
     box-sizing: border-box;
     margin: 0 auto;
-    > header {
-      flex-wrap: wrap;
-      position: relative;
-      .add {
-        position: absolute;
-        right: 0;
-        bottom: -10px;
-        margin-top: 15px;
-      }
-    }
   }
 }
 
