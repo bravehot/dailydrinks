@@ -4,11 +4,12 @@ import PropTypes from 'prop-types';
 import './AddInfo.scss'
 
 const AddInfo = ({
-  setPageShow, 
+  setCurrentScreen, 
   currentData, 
-  isPageShow, 
+  currentScreen, 
   addInfo,
-  updateInfo
+  updateInfo,
+  screenList
 }) => {
   const errorName = React.createRef()
   const errorOrder = React.createRef()
@@ -28,10 +29,10 @@ const AddInfo = ({
     if (name || order || notes) {
       let result  = window.confirm("Contents not saved. Whether to leave or not ?");
       if (result === true) {
-        setPageShow(1)
+        setCurrentScreen(screenList.LIST)
       } 
     } else {
-      setPageShow(1)
+      setCurrentScreen(screenList.LIST)
     }
   }
 
@@ -51,7 +52,7 @@ const AddInfo = ({
   }
 
   useEffect(() => {
-    if (isPageShow === 3) {
+    if (currentScreen === "EDIT") {
       setInfo({...currentData})
     } else {
       setInfo({
@@ -60,7 +61,7 @@ const AddInfo = ({
         notes: ''
       })
     }
-  }, [currentData, isPageShow])
+  }, [currentData, currentScreen])
 
   return (
     <div className="AddInfo">
@@ -93,7 +94,7 @@ const AddInfo = ({
       <div className="buttonBox">
         <button className="default back" onClick={() => {handleBack()}}>Back</button>
         {
-          isPageShow !== 3 ? <button className="primary" onClick={() => {handleAddInfo()}}>Submit</button> 
+          currentScreen !== screenList.EDIT ? <button className="primary" onClick={() => {handleAddInfo()}}>Submit</button> 
           : <button className="primary" onClick={() => {handleUpdate()}}>Update</button>
         }
       </div>
@@ -101,11 +102,12 @@ const AddInfo = ({
   )
 }
 AddInfo.propTypes = {
-  setPageShow: PropTypes.func.isRequired,
+  setCurrentScreen: PropTypes.func.isRequired,
   currentData: PropTypes.object.isRequired,
-  isPageShow: PropTypes.number.isRequired,
+  currentScreen: PropTypes.string.isRequired,
   addInfo: PropTypes.func.isRequired,
   updateInfo: PropTypes.func.isRequired,
+  screenList: PropTypes.object.isRequired
 }
 
 export default AddInfo
