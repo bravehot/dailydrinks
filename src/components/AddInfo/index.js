@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import PropTypes from 'prop-types';
 
+import {initialData, screenList} from '../../fixture/index'
 import './AddInfo.scss'
 
 const AddInfo = ({
@@ -9,15 +10,10 @@ const AddInfo = ({
   currentScreen, 
   addInfo,
   updateInfo,
-  screenList
 }) => {
   const errorName = React.createRef()
   const errorOrder = React.createRef()
-  const [info, setInfo] = useState({
-    name: '',
-    order: '',
-    notes: ''
-  })
+  const [info, setInfo] = useState({...initialData})
 
   const handleAddInfo = () => {
       fieldCheck()
@@ -52,14 +48,10 @@ const AddInfo = ({
   }
 
   useEffect(() => {
-    if (currentScreen === "EDIT") {
+    if (currentScreen === screenList.EDIT) {
       setInfo({...currentData})
     } else {
-      setInfo({
-        name: '',
-        order: '',
-        notes: ''
-      })
+      setInfo({...initialData})
     }
   }, [currentData, currentScreen])
 
@@ -107,7 +99,6 @@ AddInfo.propTypes = {
   currentScreen: PropTypes.string.isRequired,
   addInfo: PropTypes.func.isRequired,
   updateInfo: PropTypes.func.isRequired,
-  screenList: PropTypes.object.isRequired
 }
 
 export default AddInfo

@@ -1,25 +1,17 @@
 import React, { useState } from 'react'
 
-import AddInfo from '../AddInfo'
+import Header from '../../components/Header/index'
+import {initialData, screenList} from '../../fixture/index'
+import AddInfo from '../../components/AddInfo'
 import './HomePage.scss'
 
+
 const HomePage = () => {
-  const initialData = {
-    name: '',
-    order: '',
-    notes: ''
-  }
-  const screenList = {
-    LIST: "LIST",
-    ADD: "ADD",
-    EDIT: "EDIT"
-  }
-  
   const [currentScreen, setCurrentScreen] = useState(screenList.LIST)
   const [currentIndex, setIndex] = useState(null)
   const [formData, setFormData] = useState([])
   const [currentData, setCurrentData] = useState({...initialData})
-  
+
   const handleRemove = (index) => {
     if (formData.length) {
       let result  = window.confirm("Do you want to delete this order message ?");
@@ -48,9 +40,8 @@ const HomePage = () => {
   const updateInfo = (info) => {
     const {name, order, notes} = info
     if (name && order) {
-      formData[currentIndex].name = name
-      formData[currentIndex].order = order
-      formData[currentIndex].notes = notes
+      const newFormData = {name, order, notes}
+      formData[currentIndex] = {...newFormData}
       setFormData([...formData])
       setCurrentScreen(screenList.LIST)
     }
@@ -58,24 +49,11 @@ const HomePage = () => {
 
   return (
     <section className="homePage">
-    <header className={currentScreen !== screenList.LIST ? 'addInfo' : (formData.length !== 0 ? 'addInfo' : '')}>
-      {
-        currentScreen === screenList.LIST ? <p className="title">OrderList</p> 
-          : ( currentScreen === screenList.ADD ? <p className="title">Add Order</p> : <p className="title">Edit Order</p>)
-      }
-      {
-        ( currentScreen === screenList.LIST ) ?  formData.length === 0 ? <p className="no-data">
-          You don’t have any orders yet. <br/>
-          Click the “New Order” button to add your own order.
-        </p> : null : null
-      }
-      {
-        currentScreen === screenList.LIST ? 
-        <button className="add primary" onClick={() => {
-          setCurrentScreen(screenList.ADD)
-        }}>New Order</button> : null
-      }
-    </header>
+    <Header 
+      currentScreen={currentScreen} 
+      setCurrentScreen={setCurrentScreen}
+      formData={formData}
+    />
     {
       currentScreen === screenList.LIST ? 
       <section className="container">
