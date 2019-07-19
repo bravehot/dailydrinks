@@ -4,7 +4,7 @@ import AddInfo from '../AddInfo'
 import './HomePage.scss'
 
 const HomePage = () => {
-  const initalData = {
+  const initialData = {
     name: '',
     order: '',
     notes: ''
@@ -14,10 +14,11 @@ const HomePage = () => {
     ADD: "ADD",
     EDIT: "EDIT"
   }
+  
   const [currentScreen, setCurrentScreen] = useState(screenList.LIST)
   const [currentIndex, setIndex] = useState(null)
   const [formData, setFormData] = useState([])
-  const [currentData, setCurrentData] = useState({...initalData})
+  const [currentData, setCurrentData] = useState({...initialData})
   
   const handleRemove = (index) => {
     if (formData.length) {
